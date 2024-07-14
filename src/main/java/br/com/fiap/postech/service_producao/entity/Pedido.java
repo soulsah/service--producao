@@ -3,6 +3,8 @@ package br.com.fiap.postech.service_producao.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+
+import br.com.fiap.postech.service_producao.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,7 @@ public class Pedido {
     private String id;
 
     @NotEmpty(message = "O status do pedido não pode ser vazio.")
-    private String status;
+    private StatusPedido status;
 
     @NotEmpty(message = "A data de atualização do pedido não pode ser vazia.")
     private Date timestamp;

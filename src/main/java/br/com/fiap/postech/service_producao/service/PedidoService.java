@@ -1,6 +1,7 @@
 package br.com.fiap.postech.service_producao.service;
 
 import br.com.fiap.postech.service_producao.entity.Pedido;
+import br.com.fiap.postech.service_producao.enums.StatusPedido;
 import br.com.fiap.postech.service_producao.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,11 @@ public class PedidoService {
     public Pedido receberPedido(String id) {
         Pedido pedido = new Pedido();
         pedido.setId(id);
-        pedido.setStatus("Recebido");
+        pedido.setStatus(StatusPedido.RECEBIDO);
         return pedidoRepository.save(pedido);
     }
 
-    public Pedido atualizarStatusPedido(String id, String status) {
+    public Pedido atualizarStatusPedido(String id, StatusPedido status) {
         Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
         pedido.setStatus(status);
         return pedidoRepository.save(pedido);
