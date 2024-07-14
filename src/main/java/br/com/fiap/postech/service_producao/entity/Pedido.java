@@ -24,7 +24,4 @@ public class Pedido {
 
     @NotEmpty(message = "O status do pedido não pode ser vazio.")
     private StatusPedido status;
-
-    @NotEmpty(message = "A data de atualização do pedido não pode ser vazia.")
-    private Date timestamp;
 }

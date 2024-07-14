@@ -2,6 +2,7 @@ package br.com.fiap.postech.service_producao.controller;
 
 import br.com.fiap.postech.service_producao.entity.Pedido;
 import br.com.fiap.postech.service_producao.enums.StatusPedido;
+import br.com.fiap.postech.service_producao.exception.PedidoNotFoundException;
 import br.com.fiap.postech.service_producao.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +16,13 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @PostMapping("/recebePedido")
-    public Pedido recebePedido(@RequestParam String id) {
+    @PostMapping("/recebePedido/{id}")
+    public Pedido recebePedido(@PathVariable String id) {
         return pedidoService.receberPedido(id);
     }
 
     @PutMapping("/atualizaPedido/{id}")
-    public Pedido atualizaPedido(@PathVariable String id, @RequestParam String status) {
+    public Pedido atualizaPedido(@PathVariable String id, @RequestParam String status) throws PedidoNotFoundException {
         StatusPedido statusPedido;
         try {
             statusPedido = StatusPedido.valueOf(status.toUpperCase());
