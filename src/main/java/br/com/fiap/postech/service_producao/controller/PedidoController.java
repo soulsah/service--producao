@@ -18,17 +18,21 @@ import java.util.List;
 @Tag(name = "Pedido Controller", description = "Controlador para gerenciar pedidos")
 public class PedidoController {
 
+    private final PedidoService pedidoService;
+
     @Autowired
-    private PedidoService pedidoService;
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Listar todos os pedidos", description = "Retorna uma lista de todos os pedidos")
+    @Operation(summary = "Buscar pedido por ID", description = "Retorna um pedido baseado no ID fornecido")
     public Pedido getPedidoById(@PathVariable String id) throws PedidoNotFoundException {
         return pedidoService.getPedidoById(id);
     }
 
     @GetMapping
-    @Operation(summary = "Buscar pedido por ID", description = "Retorna um pedido baseado no ID fornecido")
+    @Operation(summary = "Listar todos os pedidos", description = "Retorna uma lista de todos os pedidos")
     public List<Pedido> getAllPedidos() {
         return pedidoService.getAllPedidos();
     }

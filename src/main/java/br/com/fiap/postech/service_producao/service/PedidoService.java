@@ -11,8 +11,13 @@ import java.util.List;
 
 @Service
 public class PedidoService {
+
+    private final PedidoRepository pedidoRepository;
+
     @Autowired
-    private PedidoRepository pedidoRepository;
+    public PedidoService(PedidoRepository pedidoRepository) {
+        this.pedidoRepository = pedidoRepository;
+    }
 
     public List<Pedido> getAllPedidos() {
         return pedidoRepository.findAll();
