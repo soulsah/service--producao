@@ -6,7 +6,7 @@ Tecnologias e ferramentas utilizadas
     * Java 21
 
 * Framework:
-    * Spring Boot 3.3
+    * Spring Boot 3.3.1
 
 * Bibliotecas:
     * Spring Web
