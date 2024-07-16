@@ -1,8 +1,29 @@
+version: "3"
+
 services:
-  mongodb:
+  mongo:
     image: mongo
-    ports:
-      - 27017:27017
+    restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+      MONGO_INITDB_ROOT_USERNAME: producao
+      MONGO_INITDB_ROOT_PASSWORD: yU1T55xcPR
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./schema.js:/docker-entrypoint-initdb.d/schema.js
+
+
+
+  app:
+    depends_on:
+      - mongo
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://producao:yU1T55xcPR@mongo:27017/producao?authSource=admin
+      - SPRING_PROFILES_ACTIVE=test
+    ports:
+      - "8080:8080"
+
+networks:
+  my-networks:
+    driver: bridge
